@@ -50,3 +50,7 @@ touch database/database.sqlite
 ```bash
 php artisan serve --port=8080
 ```
+
+## No docker
+
+Abrir o arquivo `dockerfiles/nginx/vhosts/todolist.conf` e configurar o path da pasta public do projeto

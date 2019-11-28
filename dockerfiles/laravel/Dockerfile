@@ -1,0 +1,55 @@
+FROM php:7.3-fpm
+
+# Packages
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    libbz2-dev \
+    libxslt-dev \
+    libldap2-dev \
+    libpq-dev \
+    php-pear \
+    curl \
+    git \
+    unzip \
+    locales \
+    vim \
+&& rm -r /var/lib/apt/lists/*
+
+# PHP Extensions
+RUN docker-php-ext-install bcmath mcrypt zip bz2 mbstring pcntl xsl soap pdo pdo_pgsql calendar gd \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+
+# Time Zone
+RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
+
+# Allow Composer to be run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Run Composer installer
+RUN curl -sS https://getcomposer.org/installer \
+    | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
+
+ENV LANG=pt_BR.UTF-8
+ENV LANGUAGE=pt_BR:pt
+ENV LC_CTYPE="pt_BR.UTF-8"
+ENV LC_NUMERIC="pt_BR.UTF-8"
+ENV LC_TIME="pt_BR.UTF-8"
+ENV LC_COLLATE="pt_BR.UTF-8"
+ENV LC_MONETARY="pt_BR.UTF-8"
+ENV LC_MESSAGES="pt_BR.UTF-8"
+ENV LC_PAPER="pt_BR.UTF-8"
+ENV LC_NAME="pt_BR.UTF-8"
+ENV LC_ADDRESS="pt_BR.UTF-8"
+ENV LC_TELEPHONE="pt_BR.UTF-8"
+ENV LC_MEASUREMENT="pt_BR.UTF-8"
+ENV LC_IDENTIFICATION="pt_BR.UTF-8"
+ENV LC_ALL=pt_BR.UTF-8
+
+RUN composer install --prefer-dist

@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  todo_backend:
+    container_name: TODO_BACKEND
+    build:
+      context: ./dockerfiles/laravel
+      dockerfile: Dockerfile
+    volumes:
+      - /data/apps:/apps
+    env_file:
+      - .env
+    networks:
+      - code-network
+
+  nginx:
+    container_name: NGINX
+    build:
+      context: ./dockerfiles/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "443:443"
+    environment:
+      - "TZ=America/Fortaleza"
+    networks:
+      - code-network
+    depends_on:
+      - todo_backend
+
+
+networks:
+  code-network:
+    driver: bridge
