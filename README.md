@@ -53,4 +53,27 @@ php artisan serve --port=8080
 
 ## No docker
 
-Abrir o arquivo `dockerfiles/nginx/vhosts/todolist.conf` e configurar o path da pasta public do projeto
+```bash
+cp .env.example .env
+```
+
+```bash
+$ vim .env
+
+DB_CONNECTION=sqlite
+#DB_HOST=127.0.0.1
+#DB_PORT=3306
+#DB_DATABASE=laravel
+#DB_USERNAME=root
+#DB_PASSWORD=
+
+#closevim
+```
+
+```bash
+touch database/database.sqlite
+```
+
+docker build -t todolist .
+
+docker run -p 8080:8080 todolist
