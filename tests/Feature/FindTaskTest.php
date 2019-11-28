@@ -17,7 +17,7 @@ class FindTaskTest extends TestCase
     {
         factory(Task::class)->create();
 
-        $response = $this->get('/api/task/1', [
+        $response = $this->get('/api/tasks/1', [
             'Accept' => 'application/json',
         ]);
 
@@ -33,7 +33,7 @@ class FindTaskTest extends TestCase
 
     public function testTaskNotFound()
     {
-        $response = $this->get('/api/task/1', [
+        $response = $this->get('/api/tasks/1', [
             'Accept' => 'application/json'
         ]);
 

@@ -22,7 +22,7 @@ class DestroyTaskTest extends TestCase
     {
         factory(Task::class)->create();
 
-        $response = $this->delete('/api/task/1', [
+        $response = $this->delete('/api/tasks/1', [
             'Accept' => 'application/json'
         ]);
 
@@ -31,7 +31,7 @@ class DestroyTaskTest extends TestCase
 
     public function testTaskNotFoundToDestroy()
     {
-        $response = $this->delete('/api/task/1', [
+        $response = $this->delete('/api/tasks/1', [
             'Accept' => 'application/json'
         ]);
 

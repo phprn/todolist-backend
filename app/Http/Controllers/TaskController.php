@@ -18,7 +18,17 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $list = Task::paginate();
+        $return = $list->toArray();
+
+        $return['meta'] = [
+            'per_page' => $return['per_page'],
+            'page' => $return['current_page'],
+            'total_items' => $return['total'],
+            'total_pages' => $return['last_page'],
+        ];
+
+        return response()->json($return);
     }
 
 

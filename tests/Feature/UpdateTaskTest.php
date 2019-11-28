@@ -22,7 +22,7 @@ class UpdateTaskTest extends TestCase
     {
         factory(Task::class)->create();
 
-        $response = $this->put('/api/task/1', [
+        $response = $this->put('/api/tasks/1', [
             'title' => 'New title',
             'description' => 'New description',
             'is_completed' => true,
