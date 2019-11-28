@@ -22,7 +22,7 @@ class ListTaskTest extends TestCase
     {
         factory(Task::class, 200)->create();
 
-        $response = $this->get('/api/tasks', [
+        $response = $this->get('/api/v1/tasks', [
             'Accept' => 'application/json',
         ]);
 

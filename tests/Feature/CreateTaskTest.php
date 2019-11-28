@@ -18,7 +18,7 @@ class CreateTaskTest extends TestCase
      */
     public function testCreateTask()
     {
-        $response = $this->post('/api/tasks', [
+        $response = $this->post('/api/v1/tasks', [
             'title' => 'My first task',
         ], [
             'Accept' => 'application/json',
@@ -37,7 +37,7 @@ class CreateTaskTest extends TestCase
 
     public function testErrorCreateTask()
     {
-        $response = $this->post('/api/tasks', [
+        $response = $this->post('/api/v1/tasks', [
             'description' => 'My task description'
         ], [
             'Accept' => 'application/json',
@@ -54,7 +54,7 @@ class CreateTaskTest extends TestCase
 
     public function testCreateTaskWithFullData()
     {
-        $response = $this->post('/api/tasks', [
+        $response = $this->post('/api/v1/tasks', [
             'title' => 'My first task',
             'description' => 'My first task description',
             'is_completed' => false,
