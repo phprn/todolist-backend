@@ -31,6 +31,7 @@ class TaskController extends Controller
         ]);
 
         $task = Task::create($request->all());
+        $task->refresh();
 
         return response()->json($task, '201');
     }

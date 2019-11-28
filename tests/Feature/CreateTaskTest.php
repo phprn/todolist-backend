@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class CreateTaskTest extends TestCase
 {
-
     use DatabaseMigrations;
 
     /**
@@ -26,5 +25,13 @@ class CreateTaskTest extends TestCase
         ]);
 
         $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'id',
+            'title',
+            'description',
+            'is_completed',
+            'created_at',
+            'updated_at',
+        ]);
     }
 }
