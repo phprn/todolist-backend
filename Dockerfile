@@ -6,6 +6,7 @@ WORKDIR /app
 COPY . /app
 RUN composer install
 RUN php artisan key:generate
+RUN php vendor/bin/phpunit
 
 CMD php artisan serve --host=0.0.0.0 --port=8080
 EXPOSE 8080
