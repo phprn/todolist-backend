@@ -16,3 +16,37 @@ Adicionar as seguntes linhas no phpunit.xml após o `SESSION_DRIVER`
 <server name="DB_DATABASE" value=":memory:"/>
 ```
 
+## Executando os testes
+
+```bash
+php vendor/bin/phpunit
+```
+
+## Instalando o projeto
+
+```bash
+composer install --prefer-dist
+cp .env.example .env
+```
+
+```bash
+$ vim .env
+
+DB_CONNECTION=sqlite
+#DB_HOST=127.0.0.1
+#DB_PORT=3306
+#DB_DATABASE=laravel
+#DB_USERNAME=root
+#DB_PASSWORD=
+
+#closevim
+```
+
+```bash
+touch database/database.sqlite
+```
+
+## Executando o projeto
+```bash
+php artisan serve --port=8080
+```
